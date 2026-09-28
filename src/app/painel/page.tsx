@@ -16,12 +16,17 @@ export default async function Inicio() {
   const { loja, nomeUsuario } = await sessaoAtual();
   const primeiroNome = nomeUsuario.split(" ")[0] || "bem-vindo";
 
-  const { data } = await criarClienteServidor()
-    .from("clientes")
-    .select("ultimo_pedido_em, aniversario, consentimento_em")
-    .eq("loja_id", loja.id);
+  const supabase = criarClienteServidor();
+  const [lista, fila] = await Promise.all([
+    supabase
+      .from("clientes")
+      .select("ultimo_pedido_em, aniversario, consentimento_em")
+      .eq("loja_id", loja.id),
+    supabase.rpc("fila_de_hoje", { p_loja: loja.id })
+  ]);
 
-  const clientes = (data as Linha[]) || [];
+  const clientes = (lista.data as Linha[]) || [];
+  const naFila = ((fila.data as unknown[]) || []).length;
   const agora = Date.now();
   const mesAtual = new Date().getMonth() + 1;
 
@@ -83,6 +88,32 @@ export default async function Inicio() {
           />
         </svg>
       </Link>
+
+      {naFila > 0 && (
+        <Link
+          href="/painel/reativacao"
+          className="mb-5 flex items-center justify-between gap-3 rounded-2xl border border-tomate/40 bg-tomate/10 px-5 py-4 transition-colors hover:bg-tomate/15"
+        >
+          <span>
+            <span className="block font-display text-[17px] font-bold leading-tight text-tomate">
+              {naFila} {naFila === 1 ? "pessoa esperando" : "pessoas esperando"} ser
+              {naFila === 1 ? "" : "em"} chamada{naFila === 1 ? "" : "s"}
+            </span>
+            <span className="block text-[13px] text-fumaca">
+              Mensagem já escrita. É só mandar.
+            </span>
+          </span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path
+              d="M9 6l6 6-6 6"
+              stroke="#E04A3F"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Link>
+      )}
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {cartoes.map((c) => (

@@ -30,7 +30,7 @@ export async function sessaoAtual(): Promise<Sessao> {
   const { data: membro } = await supabase
     .from("membros")
     .select(
-      "papel, lojas ( id, nome, slug, tipo, whatsapp, plano, status, dias_risco, dias_inativo, selos_para_premio, nome_premio )"
+      "papel, lojas ( id, nome, slug, tipo, whatsapp, plano, status, dias_risco, dias_inativo, cooldown_dias, selos_para_premio, nome_premio )"
     )
     .eq("user_id", user.id)
     .order("criado_em", { ascending: true })

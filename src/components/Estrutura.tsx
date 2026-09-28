@@ -55,7 +55,7 @@ const MENU: Item[] = [
   {
     href: "/painel/reativacao",
     texto: "Chamar de volta",
-    pronto: false,
+    pronto: true,
     icone: <I d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20.5l1.5-4.9A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4Z" />
   },
   {
