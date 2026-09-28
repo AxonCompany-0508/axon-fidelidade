@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-carvao text-creme antialiased;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* Tira as setinhas dos campos de número: o dono digita, não clica. */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  ::selection {
+    @apply bg-brasa text-carvao;
+  }
+}
+
+@layer components {
+  /* Campo de texto padrão do produto. */
+  .campo {
+    @apply w-full rounded-xl border border-borda bg-grelha px-3 py-2.5 text-[15px]
+           text-creme placeholder-cinza outline-none transition-colors
+           focus:border-brasa focus:ring-2 focus:ring-brasa/25;
+  }
+
+  .rotulo {
+    @apply mb-1.5 block text-[13px] font-medium text-fumaca;
+  }
+
+  .cartao {
+    @apply rounded-2xl border border-borda bg-forno;
+  }
+
+  .btn-brasa {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brasa px-4 py-3
+           text-[15px] font-semibold text-carvao transition-colors
+           hover:bg-brasa-claro active:bg-brasa-escuro
+           disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-linha {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-borda
+           bg-transparent px-4 py-3 text-[15px] font-medium text-creme
+           transition-colors hover:border-brasa hover:text-brasa;
+  }
+}
