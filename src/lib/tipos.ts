@@ -10,6 +10,8 @@ export type Loja = {
   status: string;
   dias_risco: number;
   dias_inativo: number;
+  selos_para_premio: number;
+  nome_premio: string;
 };
 
 export const TIPOS: { id: string; nome: string }[] = [

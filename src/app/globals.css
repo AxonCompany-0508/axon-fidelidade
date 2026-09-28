@@ -27,6 +27,25 @@
   }
 }
 
+/* Cartaz de mesa: só existe na hora de imprimir. */
+.so-imprime {
+  display: none;
+}
+
+@media print {
+  .nao-imprime {
+    display: none !important;
+  }
+  .so-imprime {
+    display: block !important;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}
+
 @layer components {
   /* Campo de texto padrão do produto. */
   .campo {

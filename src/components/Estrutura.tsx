@@ -43,13 +43,13 @@ const MENU: Item[] = [
   {
     href: "/painel/clientes",
     texto: "Clientes",
-    pronto: false,
+    pronto: true,
     icone: <I d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20M9.5 10.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM21 20v-1.5a4 4 0 0 0-3-3.87M16.5 3.6a4 4 0 0 1 0 7.75" />
   },
   {
     href: "/painel/cartao",
     texto: "Cartão fidelidade",
-    pronto: false,
+    pronto: true,
     icone: <I d="M3 7.5A1.5 1.5 0 0 1 4.5 6h15A1.5 1.5 0 0 1 21 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 16.5v-9ZM3 10h18M7 14h3" />
   },
   {
@@ -61,7 +61,7 @@ const MENU: Item[] = [
   {
     href: "/painel/qrcode",
     texto: "QR code",
-    pronto: false,
+    pronto: true,
     icone: <I d="M4 4h6v6H4V4ZM14 4h6v6h-6V4ZM4 14h6v6H4v-6ZM14 14h2.5v2.5H14V14ZM20 14v6h-3.5" />
   },
   {
