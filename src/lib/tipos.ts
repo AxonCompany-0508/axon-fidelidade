@@ -13,6 +13,10 @@ export type Loja = {
   cooldown_dias: number;
   selos_para_premio: number;
   nome_premio: string;
+  ticket_medio: number | null;
+  link_avaliacao: string | null;
+  avaliacao_apos_pedidos: number;
+  mensagem_avaliacao: string;
 };
 
 export const TIPOS: { id: string; nome: string }[] = [

@@ -47,6 +47,12 @@ const MENU: Item[] = [
     icone: <I d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20M9.5 10.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM21 20v-1.5a4 4 0 0 0-3-3.87M16.5 3.6a4 4 0 0 1 0 7.75" />
   },
   {
+    href: "/painel/resultados",
+    texto: "Resultados",
+    pronto: true,
+    icone: <I d="M4 19V9M9.5 19V5M15 19v-7M20.5 19v-4" />
+  },
+  {
     href: "/painel/cartao",
     texto: "Cartão fidelidade",
     pronto: true,
@@ -57,6 +63,12 @@ const MENU: Item[] = [
     texto: "Chamar de volta",
     pronto: true,
     icone: <I d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20.5l1.5-4.9A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4Z" />
+  },
+  {
+    href: "/painel/avaliacoes",
+    texto: "Avaliações",
+    pronto: true,
+    icone: <I d="m12 3.6 2.6 5.3 5.9.85-4.25 4.15 1 5.85L12 17l-5.25 2.75 1-5.85L3.5 9.75l5.9-.85L12 3.6Z" />
   },
   {
     href: "/painel/qrcode",
