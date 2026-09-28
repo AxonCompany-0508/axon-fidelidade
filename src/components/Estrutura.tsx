@@ -37,7 +37,7 @@ const MENU: Item[] = [
   {
     href: "/painel/marcar",
     texto: "Marcar pedido",
-    pronto: false,
+    pronto: true,
     icone: <I d="M12 5v14M5 12h14" />
   },
   {

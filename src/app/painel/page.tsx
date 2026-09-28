@@ -60,6 +60,30 @@ export default async function Inicio() {
     <>
       <Titulo texto={`Olá, ${primeiroNome}`} apoio={`${loja.nome} · ${nomeDoTipo(loja.tipo)}`} />
 
+      {/* O atalho que o atendente usa o dia inteiro */}
+      <Link
+        href="/painel/marcar"
+        className="mb-5 flex items-center justify-between gap-3 rounded-2xl bg-brasa px-5 py-4 transition-colors hover:bg-brasa-claro"
+      >
+        <span>
+          <span className="block font-display text-[19px] font-extrabold leading-tight text-carvao">
+            Marcar pedido
+          </span>
+          <span className="block text-[13px] font-medium text-carvao/70">
+            Cliente no balcão? Dá o selo aqui
+          </span>
+        </span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <path
+            d="M9 6l6 6-6 6"
+            stroke="#100C09"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </Link>
+
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {cartoes.map((c) => (
           <div key={c.rotulo} className="cartao p-4">
