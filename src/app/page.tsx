@@ -9,9 +9,17 @@ export default function Pagina() {
       <header className="border-b border-borda">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
           <Marca />
-          <span className="hidden text-[13px] text-cinza sm:block">
-            Grátis · sem cadastro · sem instalar nada
-          </span>
+          <div className="flex items-center gap-4">
+            <span className="hidden text-[13px] text-cinza sm:block">
+              Grátis · sem cadastro · sem instalar nada
+            </span>
+            <a
+              href="/entrar"
+              className="rounded-lg border border-borda px-3 py-1.5 text-[13px] font-medium text-fumaca transition-colors hover:border-brasa hover:text-brasa"
+            >
+              Entrar
+            </a>
+          </div>
         </div>
       </header>
 
