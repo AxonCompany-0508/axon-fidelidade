@@ -9,7 +9,7 @@
  *
  * Exemplo para (14) 99123-4567  ->  "5514991234567"
  */
-export const WHATSAPP = "5514999999999";
+export const WHATSAPP = "5514981441620";
 
 /** Frase que já vem escrita quando o dono clica no botão do WhatsApp. */
 export const MENSAGEM_WHATSAPP =
