@@ -153,7 +153,7 @@ export default function Estrutura({
       {/* Barra lateral — computador */}
       <aside className="hidden w-64 shrink-0 flex-col border-r border-borda bg-forno p-4 lg:flex">
         <div className="mb-6 flex items-center gap-2.5 px-1">
-          <Simbolo tamanho={30} />
+          <Simbolo tamanho={30} cor="creme" />
           <div className="min-w-0 leading-tight">
             <p className="truncate text-[14px] font-semibold text-creme">{nomeLoja}</p>
             <p className="text-[11px] font-medium tracking-[0.12em] text-brasa">FIDELIDADE</p>
@@ -177,7 +177,7 @@ export default function Estrutura({
             <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
           </svg>
         </button>
-        <Simbolo tamanho={26} />
+        <Simbolo tamanho={26} cor="creme" />
         <p className="min-w-0 flex-1 truncate text-[15px] font-semibold">{nomeLoja}</p>
       </header>
 
@@ -192,7 +192,7 @@ export default function Estrutura({
           />
           <div className="absolute inset-y-0 left-0 flex w-[270px] flex-col border-r border-borda bg-forno p-4">
             <div className="mb-6 flex items-center gap-2.5 px-1">
-              <Simbolo tamanho={30} />
+              <Simbolo tamanho={30} cor="creme" />
               <div className="min-w-0 leading-tight">
                 <p className="truncate text-[14px] font-semibold text-creme">{nomeLoja}</p>
                 <p className="text-[11px] font-medium tracking-[0.12em] text-brasa">FIDELIDADE</p>

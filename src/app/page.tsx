@@ -1,5 +1,5 @@
 import Calculadora from "@/components/Calculadora";
-import Marca from "@/components/Marca";
+import Marca, { MarcaLarga } from "@/components/Marca";
 import { ASSINATURA } from "@/lib/config";
 
 export default function Pagina() {
@@ -8,10 +8,10 @@ export default function Pagina() {
       {/* Topo */}
       <header className="border-b border-borda">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-          <Marca />
+          <MarcaLarga />
           <div className="flex items-center gap-4">
-            <span className="hidden text-[13px] text-cinza sm:block">
-              Grátis · sem cadastro · sem instalar nada
+            <span className="hidden text-[13px] text-cinza lg:block">
+              Grátis · sem cadastro
             </span>
             <a
               href="/entrar"

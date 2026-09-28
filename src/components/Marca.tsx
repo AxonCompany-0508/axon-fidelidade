@@ -1,8 +1,27 @@
 /**
- * Marca do produto. Nada a ver com o símbolo do CRM:
- * aqui é uma chama, a ideia é fogo, brasa, cozinha.
+ * Marca Axon.
+ *
+ * O símbolo é o mesmo da marca — três nós ligados, o sinal que
+ * se espalha. Foi refeito em vetor para ficar nítido em qualquer
+ * tamanho e para poder mudar de cor conforme o fundo.
+ *
+ * cor="mint"  -> verde da Axon. Usar em tela de entrar, rodapé,
+ *                página do cliente final. É a assinatura da casa.
+ * cor="creme" -> monocromático. Usar dentro do painel, para não
+ *                brigar com o laranja do produto.
  */
-export function Simbolo({ tamanho = 32 }: { tamanho?: number }) {
+
+const MINT = "#16D2A6";
+
+export function Simbolo({
+  tamanho = 32,
+  cor = "mint"
+}: {
+  tamanho?: number;
+  cor?: "mint" | "creme" | "carvao";
+}) {
+  const c = cor === "mint" ? MINT : cor === "creme" ? "#FBF6EF" : "#100C09";
+
   return (
     <svg
       width={tamanho}
@@ -12,42 +31,73 @@ export function Simbolo({ tamanho = 32 }: { tamanho?: number }) {
       aria-hidden
       className="shrink-0"
     >
-      <rect width="32" height="32" rx="9" fill="#1A1411" />
-      <rect width="32" height="32" rx="9" fill="url(#brasaFundo)" fillOpacity="0.14" />
+      {/* as duas ligações */}
       <path
-        d="M16 4.2c4.3 4.6 7 7.5 7 12 0 4.2-3.1 7.6-7 7.6s-7-3.4-7-7.6c0-2.8 1.4-4.8 3.3-7.1.6 1.5 1.5 2.5 2.5 3-.3-3.1.4-5.6 1.2-7.9Z"
-        fill="url(#brasaChama)"
+        d="M11.7 14.4 19.6 10.1M11.7 17.6 19.6 21.9"
+        stroke={c}
+        strokeWidth="1.9"
+        strokeLinecap="round"
       />
-      <path
-        d="M16 13.4c1.9 2.1 3 3.4 3 5.4 0 1.9-1.3 3.4-3 3.4s-3-1.5-3-3.4c0-1.7 1.1-3 3-5.4Z"
-        fill="#FFE2B8"
-      />
-      <defs>
-        <linearGradient id="brasaChama" x1="16" y1="4.2" x2="16" y2="23.8" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FFB05C" />
-          <stop offset="0.55" stopColor="#FF7A18" />
-          <stop offset="1" stopColor="#D95F0A" />
-        </linearGradient>
-        <linearGradient id="brasaFundo" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FF7A18" />
-          <stop offset="1" stopColor="#FF7A18" stopOpacity="0" />
-        </linearGradient>
-      </defs>
+      {/* nó de origem, cheio */}
+      <circle cx="8.6" cy="16" r="3.4" fill={c} />
+      {/* nós de destino, vazados */}
+      <circle cx="22.6" cy="8.6" r="2.9" stroke={c} strokeWidth="1.9" />
+      <circle cx="22.6" cy="23.4" r="2.9" stroke={c} strokeWidth="1.9" />
     </svg>
   );
 }
 
-export default function Marca({ tamanho = 30 }: { tamanho?: number }) {
+/** Símbolo dentro do quadradinho escuro, como no perfil do Instagram. */
+export function Selo({ tamanho = 40 }: { tamanho?: number }) {
+  return (
+    <span
+      className="inline-flex items-center justify-center rounded-[22%] bg-[#010715]"
+      style={{ width: tamanho, height: tamanho }}
+    >
+      <Simbolo tamanho={Math.round(tamanho * 0.74)} />
+    </span>
+  );
+}
+
+/** Marca completa: símbolo + nome + linha de apoio. */
+export default function Marca({
+  tamanho = 30,
+  cor = "mint",
+  apoio = true
+}: {
+  tamanho?: number;
+  cor?: "mint" | "creme";
+  apoio?: boolean;
+}) {
   return (
     <div className="flex items-center gap-2.5">
-      <Simbolo tamanho={tamanho} />
+      <Simbolo tamanho={tamanho} cor={cor} />
       <div className="leading-none">
-        <span className="block font-display text-[15px] font-extrabold tracking-tight text-creme">
-          AXON
+        <span className="block font-display text-[17px] font-extrabold tracking-tight text-creme">
+          Axon
         </span>
-        <span className="block text-[11px] font-medium tracking-[0.14em] text-brasa">
-          FIDELIDADE
-        </span>
+        {apoio && (
+          <span className="mt-0.5 block text-[10.5px] font-semibold tracking-[0.16em] text-brasa">
+            FIDELIDADE
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** Marca deitada, para o topo de página pública. */
+export function MarcaLarga() {
+  return (
+    <div className="flex items-center gap-3">
+      <Simbolo tamanho={34} />
+      <div>
+        <p className="font-display text-[19px] font-extrabold leading-none tracking-tight text-creme">
+          Axon <span className="text-brasa">Fidelidade</span>
+        </p>
+        <p className="mt-1 hidden text-[12px] leading-none text-fumaca sm:block">
+          Faz o cliente voltar — e avisa quando ele some.
+        </p>
       </div>
     </div>
   );
