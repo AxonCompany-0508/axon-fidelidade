@@ -26,7 +26,7 @@ export default function FormCadastro({
   const [telefone, setTelefone] = useState("");
   const [dia, setDia] = useState("");
   const [mes, setMes] = useState("");
-  const [consente, setConsente] = useState(true);
+  const [consente, setConsente] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [carregando, setCarregando] = useState(false);
 
