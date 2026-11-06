@@ -1,3 +1,4 @@
+
 "use client";
 
 import QRCode from "qrcode";
@@ -13,7 +14,8 @@ export default function Qrs({
   nomeLoja,
   selosParaPremio,
   nomePremio,
-  origens
+  origens,
+  podeEditar
 }: {
   lojaId: string;
   slug: string;
@@ -21,6 +23,7 @@ export default function Qrs({
   selosParaPremio: number;
   nomePremio: string;
   origens: Origem[];
+  podeEditar: boolean;
 }) {
   const router = useRouter();
   const [base, setBase] = useState("");
@@ -91,6 +94,12 @@ export default function Qrs({
   async function criarOrigem(e: React.FormEvent) {
     e.preventDefault();
     setErro(null);
+
+    if (!podeEditar) {
+      setErro("Você não tem permissão para criar QR Codes.");
+      return;
+    }
+
     if (!novo.trim()) return;
 
     setSalvando(true);
@@ -103,20 +112,32 @@ export default function Qrs({
       setErro(error.message);
       return;
     }
+
     setNovo("");
     router.refresh();
   }
 
   async function apagar(o: Origem) {
+    if (!podeEditar) {
+      setErro("Você não tem permissão para excluir QR Codes.");
+      return;
+    }
+
     if (origens.length <= 1) {
       setErro("Deixe pelo menos um QR ativo.");
       return;
     }
-    const { error } = await criarCliente().from("origens").delete().eq("id", o.id);
+
+    const { error } = await criarCliente()
+      .from("origens")
+      .delete()
+      .eq("id", o.id);
+
     if (error) {
       setErro(error.message);
       return;
     }
+
     router.refresh();
   }
 
@@ -155,21 +176,24 @@ export default function Qrs({
                       Quem escanear aqui entra marcado como &quot;{o.nome}&quot;
                     </p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => apagar(o)}
-                    aria-label={`Apagar ${o.nome}`}
-                    className="rounded-lg border border-borda p-2 text-cinza transition-colors hover:border-tomate hover:text-tomate"
-                  >
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
-                      <path
-                        d="M4 4l8 8M12 4l-8 8"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </button>
+
+                  {podeEditar && (
+                    <button
+                      type="button"
+                      onClick={() => apagar(o)}
+                      aria-label={`Apagar ${o.nome}`}
+                      className="rounded-lg border border-borda p-2 text-cinza transition-colors hover:border-tomate hover:text-tomate"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+                        <path
+                          d="M4 4l8 8M12 4l-8 8"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </button>
+                  )}
                 </div>
 
                 <p className="mt-3 overflow-x-auto whitespace-nowrap rounded-lg border border-borda bg-grelha px-3 py-2 text-[12.5px] text-fumaca">
@@ -180,9 +204,11 @@ export default function Qrs({
                   <button type="button" onClick={() => copiar(o)} className="btn-linha !py-2">
                     {copiado === o.id ? "Link copiado" : "Copiar link"}
                   </button>
+
                   <button type="button" onClick={() => baixar(o)} className="btn-linha !py-2">
                     Baixar PNG
                   </button>
+
                   <button
                     type="button"
                     onClick={() => imprimir(o)}
@@ -196,23 +222,27 @@ export default function Qrs({
           </section>
         ))}
 
-        <form onSubmit={criarOrigem} className="cartao p-5">
-          <h2 className="font-display text-[17px] font-bold">Criar outro QR</h2>
-          <p className="mt-1 text-[14px] text-fumaca">
-            Exemplos: Embalagem, Delivery, Instagram, Balcão da rua 2.
-          </p>
-          <div className="mt-4 flex gap-2">
-            <input
-              value={novo}
-              onChange={(e) => setNovo(e.target.value)}
-              placeholder="Nome do ponto"
-              className="campo flex-1"
-            />
-            <button type="submit" disabled={salvando} className="btn-brasa shrink-0">
-              Criar
-            </button>
-          </div>
-        </form>
+        {podeEditar && (
+          <form onSubmit={criarOrigem} className="cartao p-5">
+            <h2 className="font-display text-[17px] font-bold">Criar outro QR</h2>
+            <p className="mt-1 text-[14px] text-fumaca">
+              Exemplos: Embalagem, Delivery, Instagram, Balcão da rua 2.
+            </p>
+
+            <div className="mt-4 flex gap-2">
+              <input
+                value={novo}
+                onChange={(e) => setNovo(e.target.value)}
+                placeholder="Nome do ponto"
+                className="campo flex-1"
+              />
+
+              <button type="submit" disabled={salvando} className="btn-brasa shrink-0">
+                {salvando ? "Criando..." : "Criar"}
+              </button>
+            </div>
+          </form>
+        )}
 
         <section className="cartao p-5">
           <h2 className="font-display text-[17px] font-bold">Testando agora</h2>
@@ -242,6 +272,7 @@ export default function Qrs({
           >
             {nomeLoja}
           </p>
+
           <h1
             style={{
               fontSize: 46,
@@ -254,6 +285,7 @@ export default function Qrs({
             Aponte a câmera
             <br />e ganhe
           </h1>
+
           <p style={{ fontSize: 22, margin: "18px 0 0", color: "#000" }}>
             A cada <strong>{selosParaPremio} pedidos</strong>,<br />
             <strong>{nomePremio}</strong>
@@ -271,6 +303,7 @@ export default function Qrs({
           <p style={{ fontSize: 17, margin: "22px 0 0", color: "#333" }}>
             Sem aplicativo. Sem cartãozinho pra perder.
           </p>
+
           <p style={{ fontSize: 13, margin: "8px 0 0", color: "#777" }}>
             Leva 30 segundos: só o nome e o WhatsApp.
           </p>
