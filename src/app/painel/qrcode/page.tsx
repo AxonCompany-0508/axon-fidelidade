@@ -1,3 +1,4 @@
+
 import Qrs from "./Qrs";
 import { Titulo } from "@/components/ui";
 import { sessaoAtual } from "@/lib/loja";
@@ -12,13 +13,15 @@ export type Origem = {
 };
 
 export default async function PaginaQr() {
-  const { loja } = await sessaoAtual();
+  const { loja, papel } = await sessaoAtual();
 
   const { data } = await criarClienteServidor()
     .from("origens")
     .select("id, nome, token")
     .eq("loja_id", loja.id)
     .order("criada_em");
+
+  const podeEditar = papel === "dono" || papel === "gerente";
 
   return (
     <>
@@ -33,6 +36,7 @@ export default async function PaginaQr() {
         selosParaPremio={loja.selos_para_premio}
         nomePremio={loja.nome_premio}
         origens={(data as Origem[]) || []}
+        podeEditar={podeEditar}
       />
     </>
   );
